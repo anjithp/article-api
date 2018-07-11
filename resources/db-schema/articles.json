@@ -1,0 +1,47 @@
+{
+    "settings": {
+        "index": {
+            "number_of_replicas": 1,
+            "number_of_shards": 5
+        }
+    },
+    "mappings": {
+        "_doc": {
+            "properties": {
+                "date": {
+                    "type": "date"
+                },
+                "id": {
+                    "type": "keyword"
+                },
+                "title": {
+                    "type": "text"
+                },
+                "body": {
+                    "type": "text"
+                },
+                "tags": {
+                    "type": "keyword"
+                }
+            },
+            "dynamic_templates": [
+                {
+                    "strings": {
+                        "match_mapping_type": "string",
+                        "mapping": {
+                            "type": "text"
+                        }
+                    }
+                },
+                {
+                    "no_doc_values": {
+                        "match_mapping_type": "*",
+                        "mapping": {
+                            "type": "{dynamic_type}"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

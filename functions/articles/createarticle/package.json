@@ -1,0 +1,16 @@
+{
+  "name": "createarticle",
+  "version": "1.0.0",
+  "description": "Responsiblefor creating an article in the system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha **/*.test.js"
+  },
+  "author": "Anjithkumar Paila",
+  "license": "ISC",
+  "dependencies": {
+    "persistence": "file:../../persistence"
+  },
+  "devDependencies": {
+  }
+}

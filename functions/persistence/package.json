@@ -1,0 +1,17 @@
+{
+  "name": "persistence",
+  "version": "1.0.0",
+  "description": "Responsible for data persistence.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha **/*.test.js"
+  },
+  "author": "Anjithkumar Paila",
+  "license": "ISC",
+  "devDependencies": {
+  },
+  "dependencies": {
+    "elasticsearch": "14.2.2",
+    "http-aws-es": "4.0.0"
+  }
+}
