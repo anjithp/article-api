@@ -13,7 +13,16 @@ let esClient = new elasticsearch.Client({
 
 let uuid = require('uuid');
 
+let PersistenceError = require('./persistence.error.js');
 
+/**
+ * Indexes document in to the database.
+ * 
+ * @param {object} doc document to be indexed
+ * @param {string} indexName name of search index
+ * 
+ * @return {object} indexed document
+ */
 module.exports.indexDocument = async (doc, indexName) => {
 	let id = uuid.v1();
 	try {
@@ -31,10 +40,18 @@ module.exports.indexDocument = async (doc, indexName) => {
 		return doc;
 	} catch (e) {
 		console.log(`Error occurred while indexing document with the id ${id}. Error is: ` + e);
-		throw new Error(prepareErrorMessage(e));
+		throw new PersistenceError(prepareErrorMessage(e));
 	}
 };
 
+/**
+ * Indexes document in to the database.
+ * 
+ * @param {string} id identifier of the document to be retrieved
+ * @param {string} indexName name of search index
+ * 
+ * @return {object}  document from the database
+ */
 module.exports.getDocument = async (id, indexName) => {
 	try {
 		let response = await esClient.get({
@@ -45,11 +62,18 @@ module.exports.getDocument = async (id, indexName) => {
 		return response['_source'];
 	} catch (e) {
 		console.log(`Error occurred while getting document with the id ${id}. Error is: ` + e);
-		throw new Error(prepareErrorMessage(e));
+		throw new PersistenceError(prepareErrorMessage(e));
 	}
 };
 
-
+/**
+ * Seaches for documents matching the given query.
+ * 
+ * @param {object} query search query
+ * @param {string} indexName name of search index
+ * 
+ * @return {object} list of matching documents
+ */
 module.exports.searchDocuments = async (query, indexName) => {
 	try {
 		const searchResponseFromDb = await esClient.search({
@@ -63,7 +87,7 @@ module.exports.searchDocuments = async (query, indexName) => {
 		return response;
 	} catch (e) {
 		console.log(`Error occurred while searching documents. Error is: ` + e);
-		throw new Error(prepareErrorMessage(e));
+		throw new PersistenceError(prepareErrorMessage(e));
 	}
 };
 

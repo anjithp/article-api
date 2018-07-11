@@ -6,6 +6,7 @@ exports.handler = async (event, context, callback) => {
 		try {
 			let tagName = event.tagName;
 			let date = event.date.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+			//further logic can be written to validate whether the passed date is correct or not
 			console.log(`Received request to get tag details with the name ${tagName} on date ${date}.`);
 			let loadedTemplate = fs.readFileSync(__dirname + "/templates/gettag.json", "utf-8");
 			let query = JSON.parse(loadedTemplate);
