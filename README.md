@@ -1,6 +1,5 @@
-# Fairfax Technical Test
-
 Following technlogies are used for implementing the Article API:  
+
 1) AWS API Gateway
 2) AWS Lambda(Node.js runtime)
 3) Elastic Search 
